@@ -118,6 +118,18 @@ def get_youtube_start_time():
     return {}
 
 
+import os
+from flask import Flask
+import logging
+
+# Create the Flask app
+APP = Flask(__name__)
+
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    APP.run(debug=True, port=5001)
+    
+    # Get the debug setting from an environment variable
+    DEBUG_MODE = os.environ.get('FLASK_DEBUG', 'False') == 'True'
+    
+    # Run the app with debug mode based on the environment variable
+    APP.run(debug=DEBUG_MODE, port=5001)
